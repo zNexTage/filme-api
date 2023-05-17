@@ -1,11 +1,10 @@
 using AutoMapper;
-using FilmesApi.Data;
-using FilmesApi.Models;
 using FilmesAPI.Data;
+using FilmesAPI.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FilmesApi.Controllers;
+namespace FilmesAPI.Controllers;
 
 [ApiController]
 [Route("[controller]")]
