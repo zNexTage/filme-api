@@ -13,4 +13,6 @@ public class Endereco
     [MaxLength(100, ErrorMessage = "O logradouro deve ter no máximo 100 caracteres")]
     public string Logradouro { get; set; }
     public int Numero { get; set; }
+
+    public virtual Cinema Cinema {get;set;}
 }
