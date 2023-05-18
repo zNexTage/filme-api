@@ -14,7 +14,10 @@ builder.Configuration
 
 // Add services to the container.
 string connectionString = builder.Configuration.GetConnectionString("MysqlConnection")!;
-builder.Services.AddDbContext<FilmeContext>(opts => opts.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+builder.Services.AddDbContext<FilmeContext>(opts => 
+opts
+.UseLazyLoadingProxies() //Após adicionar a lib Proxies; Permite carregar os atributos que apontam para alguma instância, por exemplo o public virtual Endereco Endereco
+.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 //Configuração do AutoMapper;
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
