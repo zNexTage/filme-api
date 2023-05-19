@@ -22,4 +22,6 @@ public class Filme {
     
     [Required(ErrorMessage = "A sinopse do filme é obrigatório")]
     public string Sinopse { get;set; }
+
+    public virtual ICollection<Sessao> Sessoes { get; set; }
 }
