@@ -13,4 +13,6 @@ public class Cinema
     public int EnderecoId { get; set; } // Um cinema precisa ter um endereço.
 
     public virtual Endereco Endereco { get; set; } // Relacionamento 1 para 1; É necessário fazer o mesmo no modelo Endereco
+
+    public virtual ICollection<Sessao> Sessoes { get; set; }
 }
