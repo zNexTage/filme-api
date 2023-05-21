@@ -44,9 +44,22 @@ public class FilmeController : ControllerBase {
     }
 
     [HttpGet]
-    public IEnumerable<ReadFilmeDTO> ObterFilmes([FromQuery]int skip = 0, [FromQuery]int take = 50){
-        /*Não usamos 404 aqui, pois essa requisição devolve uma lista de filmes, e não uma busca. */
-        return _mapper.Map<List<ReadFilmeDTO>>(_context.Filmes.Skip(skip).Take(take).ToList());
+    public IEnumerable<ReadFilmeDTO> ObterFilmes(
+        [FromQuery]int skip = 0,
+        [FromQuery]int take = 50,
+        [FromQuery] string? nomeCinema = null
+        ){
+            if(string.IsNullOrEmpty(nomeCinema)){
+                /*Não usamos 404 aqui, pois essa requisição devolve uma lista de filmes, e não uma busca. */
+                return _mapper.Map<List<ReadFilmeDTO>>(_context.Filmes.Skip(skip).Take(take).ToList());
+            }
+
+            return _mapper.Map<List<ReadFilmeDTO>>(_context.Filmes
+            .Skip(skip)
+            .Take(take)
+            .Where(filme => filme.Sessoes.Any(sessao => sessao.Cinema.Nome == nomeCinema))
+            .ToList());
+        
     }
 
     [HttpGet("{id}")] //recebe o id via parâmetro
